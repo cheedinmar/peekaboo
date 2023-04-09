@@ -17,6 +17,10 @@ export default {
       type: Boolean,
       default:false
     },
+     matched:{
+      type: Boolean,
+      default:false
+    },
     position:{
       type:Number,
       required:true
@@ -25,7 +29,8 @@ export default {
   setup(props, context){
     const selectCard = ()=>{
       context.emit('select-card', {
-        position:props.position
+        position:props.position,
+        faceValue:props.value
       })
     }
     return{
