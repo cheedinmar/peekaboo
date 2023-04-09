@@ -14,11 +14,13 @@
   <h2>
     {{ status }}
   </h2>
+  <button @click="shuffleCards"> Shuffle Cards</button>
 </template>
 
 <script>
 import BaseCard from "./components/BaseCard.vue";
 import { ref, watch, computed } from "vue";
+import _ from "lodash"
 export default {
   components: {
     BaseCard,
@@ -37,10 +39,13 @@ export default {
       const remainingCards = CardList.value.filter(card=>card.matched == false).length
       return remainingCards/2
     })
+    const shuffleCards = ()=>{
+      CardList.value = _.shuffle(CardList.value)
+    }
     for (let i = 0; i < 16; i++) {
       CardList.value.push({
-        value: 10,
-        visible: false,
+        value: i,
+        visible: true,
         position: i,
         matched: false,
       });
@@ -79,6 +84,7 @@ export default {
       flipCard,
       userSelection,
       status,
+      shuffleCards
     };
   },
 };
