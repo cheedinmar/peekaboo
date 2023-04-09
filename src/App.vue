@@ -18,7 +18,7 @@
 
 <script>
 import BaseCard from "./components/BaseCard.vue";
-import { ref, watch } from "vue";
+import { ref, watch, computed } from "vue";
 export default {
   components: {
     BaseCard,
@@ -26,13 +26,23 @@ export default {
   setup() {
     const CardList = ref([]);
     const userSelection = ref([]);
-    const status = ref("");
+    const status =  computed(()=>{
+      if (remainingPairs.value == 0){
+        return 'players win'
+      }else {
+        return   `Remaining Pairs: ${remainingPairs.value}`
+      }
+    });
+    const remainingPairs = computed(()=>{
+      const remainingCards = CardList.value.filter(card=>card.matched == false).length
+      return remainingCards/2
+    })
     for (let i = 0; i < 16; i++) {
       CardList.value.push({
-        value: i,
+        value: 10,
         visible: false,
         position: i,
-        mactched: false,
+        matched: false,
       });
     }
     const flipCard = (payload) => {
