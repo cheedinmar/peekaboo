@@ -42,14 +42,28 @@ export default {
     const shuffleCards = ()=>{
       CardList.value = _.shuffle(CardList.value)
     }
-    for (let i = 0; i < 16; i++) {
-      CardList.value.push({
-        value: 8,
-        visible: false,
-        position: i,
+    const cardItems = [1,2,3,4,5,6,7,8]
+    cardItems.forEach(item =>{
+       CardList.value.push({
+        value: item,
+        visible: true,
+        position: null,
         matched: false,
       });
-    }
+         CardList.value.push({
+        value: item,
+        visible: true,
+        position: null,
+        matched: false,
+      });
+    })
+    CardList.value = CardList.value.map((card, index)=>{
+      return {
+        ...card,
+        position:index
+      }
+    })
+
     const flipCard = (payload) => {
       CardList.value[payload.position].visible = true;
       if (userSelection.value[0]) {
