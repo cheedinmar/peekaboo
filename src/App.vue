@@ -93,8 +93,11 @@ export default {
              CardList.value[CardOne.position].matched = true;
             CardList.value[CardTwo.position].matched = true;
           } else {
-            CardList.value[CardOne.position].visible = false;
+            setTimeout(()=>{
+               CardList.value[CardOne.position].visible = false;
             CardList.value[CardTwo.position].visible = false;
+            }, 2000)
+           
           }
 
           userSelection.value.length = 0;
