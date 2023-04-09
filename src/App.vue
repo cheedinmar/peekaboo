@@ -14,13 +14,13 @@
   <h2>
     {{ status }}
   </h2>
-  <button @click="restartGame"> Shuffle Cards</button>
+  <button @click="restartGame">Shuffle Cards</button>
 </template>
 
 <script>
 import BaseCard from "./components/BaseCard.vue";
 import { ref, watch, computed } from "vue";
-import _ from "lodash"
+import _ from "lodash";
 export default {
   components: {
     BaseCard,
@@ -28,61 +28,70 @@ export default {
   setup() {
     const CardList = ref([]);
     const userSelection = ref([]);
-    const status =  computed(()=>{
-      if (remainingPairs.value == 0){
-        return 'players win'
-      }else {
-        return   `Remaining Pairs: ${remainingPairs.value}`
+    const status = computed(() => {
+      if (remainingPairs.value == 0) {
+        return "players win";
+      } else {
+        return `Remaining Pairs: ${remainingPairs.value}`;
       }
     });
-    const remainingPairs = computed(()=>{
-      const remainingCards = CardList.value.filter(card=>card.matched == false).length
-      return remainingCards/2
-    })
-    const shuffleCards = ()=>{
-      CardList.value = _.shuffle(CardList.value)
-    }
-    const cardItems = [1,2,3,4,5,6,7,8]
-    cardItems.forEach(item =>{
-       CardList.value.push({
+    const remainingPairs = computed(() => {
+      const remainingCards = CardList.value.filter(
+        (card) => card.matched == false
+      ).length;
+      return remainingCards / 2;
+    });
+    const shuffleCards = () => {
+      CardList.value = _.shuffle(CardList.value);
+    };
+    const cardItems = [1, 2, 3, 4, 5, 6, 7, 8];
+    cardItems.forEach((item) => {
+      CardList.value.push({
         value: item,
         visible: true,
         position: null,
         matched: false,
       });
-         CardList.value.push({
+      CardList.value.push({
         value: item,
         visible: true,
         position: null,
         matched: false,
       });
-    })
-    CardList.value = CardList.value.map((card, index)=>{
+    });
+    CardList.value = CardList.value.map((card, index) => {
       return {
         ...card,
-        position:index
-      }
-    })
+        position: index,
+      };
+    });
 
     const flipCard = (payload) => {
       CardList.value[payload.position].visible = true;
       if (userSelection.value[0]) {
-        userSelection.value[1] = payload;
+        if (
+          userSelection.value[0].position === payload.position &&
+          userSelection.value[0].faceValue === payload.faceValue
+        ) {
+          return;
+        } else {
+          userSelection.value[1] = payload;
+        }
       } else {
         userSelection.value[0] = payload;
       }
     };
-    const restartGame = ()=>{
-      shuffleCards()
-    CardList.value =  CardList.value.map((card, index)=>{
-        return{
+    const restartGame = () => {
+      shuffleCards();
+      CardList.value = CardList.value.map((card, index) => {
+        return {
           ...card,
-          matched:false,
-          position:index,
-          visible:false
-        }
-      })
-    }
+          matched: false,
+          position: index,
+          visible: false,
+        };
+      });
+    };
     watch(
       userSelection,
       (currentVal) => {
@@ -90,14 +99,13 @@ export default {
           const CardOne = currentVal[0];
           const CardTwo = currentVal[1];
           if (CardOne.faceValue == CardTwo.faceValue) {
-             CardList.value[CardOne.position].matched = true;
+            CardList.value[CardOne.position].matched = true;
             CardList.value[CardTwo.position].matched = true;
           } else {
-            setTimeout(()=>{
-               CardList.value[CardOne.position].visible = false;
-            CardList.value[CardTwo.position].visible = false;
-            }, 2000)
-           
+            setTimeout(() => {
+              CardList.value[CardOne.position].visible = false;
+              CardList.value[CardTwo.position].visible = false;
+            }, 2000);
           }
 
           userSelection.value.length = 0;
@@ -111,7 +119,7 @@ export default {
       userSelection,
       status,
       shuffleCards,
-      restartGame
+      restartGame,
     };
   },
 };
