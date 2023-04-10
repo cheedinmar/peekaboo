@@ -16,11 +16,11 @@
     />
     </transition-group>
 
-  <h2 class="status">
+  <h2 class="status" style="padding:15px 0">
     {{ status }}
   </h2>
   
-  <button v-if="!newPlayer" @click="restartGame" class="button" style="background-color: orange;">
+  <button v-if="!newPlayer" @click="restartGame" class="button" style="background-color: orange; margin-bottom;:15px ">
     <img src="/images/retart.svg" alt="restart" />Restart Game
   </button>
 </template>
@@ -170,21 +170,26 @@ font-family: 'Black Ops One', sans-serif;
 
   background-color: #00070c;
   min-height: 100vh;
+  height: 100%;
   color: #fff;
-  padding-top: 45px;
+ 
 }
-
+h2{
+  margin:0
+}
 .game-board {
   display: grid;
-  grid-template-columns: repeat(4, 100px);
-  grid-column-gap: 22px;
-  grid-template-rows: repeat(4, 100px);
-  grid-row-gap: 22px;
+  grid-template-columns: repeat(4, 120px);
+  grid-column-gap: 40px;
+  grid-template-rows: repeat(4, 120px);
+  grid-row-gap: 30px;
   justify-content: center;
 }
 .title {
-  width: 50%;
+  width: 30vw;
   height: auto;
+   padding-top: 35px;
+
 }
 .button{
   background-color: #41b883;
@@ -214,6 +219,11 @@ font-family: 'Black Ops One', sans-serif;
   grid-template-rows: repeat(4, 80px);
   grid-row-gap: 22px;
   justify-content: center;
+}
+.title{
+  width: 50%;
+  height: auto;
+   padding-top: 45px;
 }
 }
 </style>
