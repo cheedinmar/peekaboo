@@ -25,6 +25,7 @@
 import BaseCard from "./components/BaseCard.vue";
 import { ref, watch, computed } from "vue";
 import _ from "lodash";
+import {launchConfetti}from "@/utilities/confetti"
 export default {
   components: {
     BaseCard,
@@ -34,7 +35,7 @@ export default {
     const userSelection = ref([]);
     const status = computed(() => {
       if (remainingPairs.value == 0) {
-        return "players win";
+        return "You Win";
       } else {
         return `Remaining Pairs: ${remainingPairs.value}`;
       }
@@ -105,6 +106,11 @@ export default {
         };
       });
     };
+    watch(remainingPairs, currentVal =>{
+      if(currentVal == 0){
+        launchConfetti()
+      }
+    })
     watch(
       userSelection,
       (currentVal) => {
@@ -118,7 +124,7 @@ export default {
             setTimeout(() => {
               CardList.value[CardOne.position].visible = false;
               CardList.value[CardTwo.position].visible = false;
-            }, 2000);
+            }, 1000);
           }
 
           userSelection.value.length = 0;
@@ -169,7 +175,7 @@ body {
   height: auto;
 }
 .button{
-  background-color: orange;
+  background-color: #41b883;
   color: white;
   padding: 0.75rem 0.5rem;
   display: flex;
