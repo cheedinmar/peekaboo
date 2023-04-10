@@ -1,6 +1,9 @@
 <template>
   <img src="/images/26062e60b8-Peekaboo_Title.png" class="title" />
- 
+ <p class="description">A card matching game powered by Vue.js 3!</p>
+  <button v-if="newPlayer" @click="startGame" class="button " style="margin-bottom: 20px;">
+    <img src="/images/start.svg" alt="" />Start Game
+  </button>
     <transition-group tag="section" class="game-board" name="shuffle-card">
       <base-card
       v-for="(card) in CardList"
@@ -13,10 +16,11 @@
     />
     </transition-group>
 
-  <h2>
+  <h2 class="status">
     {{ status }}
   </h2>
-  <button @click="restartGame" class="button">
+  
+  <button v-if="!newPlayer" @click="restartGame" class="button" style="background-color: orange;">
     <img src="/images/retart.svg" alt="restart" />Restart Game
   </button>
 </template>
@@ -33,6 +37,11 @@ export default {
   setup() {
     const CardList = ref([]);
     const userSelection = ref([]);
+    const newPlayer = ref(true)
+    const startGame=()=>{
+      newPlayer.value = false
+      restartGame()
+    }
     const status = computed(() => {
       if (remainingPairs.value == 0) {
         return "You Win";
@@ -61,7 +70,7 @@ export default {
       CardList.value.push({
         value: item,
         variant:1,
-        visible: true,
+        visible: false,
         position: null,
         matched: false,
       });
@@ -138,6 +147,8 @@ export default {
       userSelection,
       status,
       restartGame,
+      startGame,
+      newPlayer
     };
   },
 };
@@ -150,7 +161,8 @@ body {
   padding: 0;
 }
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+font-family: 'Black Ops One', sans-serif;
+                                                
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -159,7 +171,7 @@ body {
   background-color: #00070c;
   min-height: 100vh;
   color: #fff;
-  padding-top: 40px;
+  padding-top: 45px;
 }
 
 .game-board {
@@ -184,11 +196,24 @@ body {
   margin: 0 auto;
   font-weight: bold;
   border-radius: 10px;
+  border:0;
+  font-size: 1.1rem;
 }
 .button img{
-  padding-right: 10px;
+  padding-right: 5px;
 }
 .shuffle-card-move{
-  transition : transform 0.8s ease-in 
+  transition : transform 0.8s ease-in;
+  margin:0
+}
+@media only screen and (max-width: 600px) {
+  .game-board {
+  display: grid;
+  grid-template-columns: repeat(4, 80px);
+  grid-column-gap: 22px;
+  grid-template-rows: repeat(4, 80px);
+  grid-row-gap: 22px;
+  justify-content: center;
+}
 }
 </style>

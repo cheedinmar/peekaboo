@@ -94,4 +94,10 @@ export default {
   width:55px;
   height:55px;
 }
+@media only screen and (max-width: 600px) {
+  .image{
+  width:40px;
+  height:40px;
+}
+}
 </style>
