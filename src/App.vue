@@ -1,5 +1,5 @@
 <template>
-  <img src="../public/images/26062e60b8-Peekaboo_Title.png" class="title" />
+  <img src="/images/26062e60b8-Peekaboo_Title.png" class="title" />
   <section class="game-board">
     <base-card
       v-for="(card, index) in CardList"
@@ -15,7 +15,7 @@
     {{ status }}
   </h2>
   <button @click="restartGame" class="button">
-    <img src="../public/images/retart.svg" alt="restart" />Restart Game
+    <img src="/images/retart.svg" alt="restart" />Restart Game
   </button>
 </template>
 

@@ -2,7 +2,7 @@
  <div class="card" @click="selectCard">
   <div class="card-face is-front" v-if="visible">
     <img :src="`/images/${value}.png`" :alt="value" class="image"/>
-  <img v-if="matched" src="../../public/images/check-mark.svg" class="icon-checkmark"/>
+  <img v-if="matched" src="/images/check-mark.svg" class="icon-checkmark"/>
 
   </div>
   <div class="card-face is-back" v-else></div>
