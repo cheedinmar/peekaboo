@@ -1,5 +1,5 @@
 <template>
-  <h1>Peek a vue</h1>
+  <img src="../public/images/26062e60b8-Peekaboo_Title.png" class="title" />
   <section class="game-board">
     <base-card
       v-for="(card, index) in CardList"
@@ -14,7 +14,9 @@
   <h2>
     {{ status }}
   </h2>
-  <button @click="restartGame">Shuffle Cards</button>
+  <button @click="restartGame" class="button">
+    <img src="../public/images/retart.svg" alt="restart" />Restart Game
+  </button>
 </template>
 
 <script>
@@ -44,7 +46,16 @@ export default {
     const shuffleCards = () => {
       CardList.value = _.shuffle(CardList.value);
     };
-    const cardItems = [1, 2, 3, 4, 5, 6, 7, 8];
+    const cardItems = [
+      "angular",
+      "c++",
+      "vue",
+      "html",
+      "laravel",
+      "python",
+      "ruby",
+      "typescript",
+    ];
     cardItems.forEach((item) => {
       CardList.value.push({
         value: item,
@@ -126,23 +137,52 @@ export default {
 </script>
 
 <style>
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  background-repeat: repeat;
+  background-color: #00070c;
+  min-height: 100vh;
+  color: #fff;
+}
+h1,
+h2 {
+  margin-top: 0;
 }
 .card {
-  border: 5px solid #ccc;
 }
 .game-board {
   display: grid;
-  grid-template-columns: 100px 100px 100px 100px;
-  grid-column-gap: 30px;
-  grid-template-rows: 100px 100px 100px 100px;
-  grid-row-gap: 30px;
+  grid-template-columns: repeat(4, 100px);
+  grid-column-gap: 22px;
+  grid-template-rows: repeat(4, 100px);
+  grid-row-gap: 22px;
   justify-content: center;
+}
+.title {
+  width: 50%;
+  height: auto;
+}
+.button{
+  background-color: orange;
+  color: white;
+  padding: 0.75rem 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  font-weight: bold;
+  border-radius: 10px;
+}
+.button img{
+  padding-right: 10px;
 }
 </style>
