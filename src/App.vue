@@ -148,17 +148,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-repeat: repeat;
+
   background-color: #00070c;
   min-height: 100vh;
   color: #fff;
+  padding-top: 40px;
 }
-h1,
-h2 {
-  margin-top: 0;
-}
-.card {
-}
+
 .game-board {
   display: grid;
   grid-template-columns: repeat(4, 100px);
