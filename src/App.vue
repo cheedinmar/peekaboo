@@ -216,9 +216,9 @@ h2{
   .game-board {
   display: grid;
   grid-template-columns: repeat(4, 80px);
-  grid-column-gap: 22px;
+  grid-column-gap: 12px;
   grid-template-rows: repeat(4, 80px);
-  grid-row-gap: 22px;
+  grid-row-gap: 12px;
   justify-content: center;
 }
 .title{

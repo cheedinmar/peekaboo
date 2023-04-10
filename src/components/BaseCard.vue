@@ -58,6 +58,7 @@ export default {
   position: relative;
   transition: 0.5s transform ease-in;
   transform-style: preserve-3d;
+  
 }
 .card.is-flipped{
   transform: rotateY(180deg);
@@ -67,6 +68,7 @@ export default {
   background-color: rgb(123, 9, 135);
   color: white;
   display: flex;
+  width:100%;
   align-items: center;
   justify-content: center;
    transform: rotateY(180deg)
@@ -98,6 +100,9 @@ export default {
   .image{
   width:35px;
   height:35px;
+}
+.card{
+  width:20vw
 }
 }
 </style>
