@@ -170,6 +170,7 @@ font-family: 'Black Ops One', sans-serif;
 
   background-color: #00070c;
   min-height: 100vh;
+  min-width:screen;
   height: 100%;
   color: #fff;
  
