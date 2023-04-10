@@ -1,16 +1,18 @@
 <template>
   <img src="/images/26062e60b8-Peekaboo_Title.png" class="title" />
-  <section class="game-board">
-    <base-card
-      v-for="(card, index) in CardList"
+ 
+    <transition-group tag="section" class="game-board" name="shuffle-card">
+      <base-card
+      v-for="(card) in CardList"
       :value="card.value"
       :visible="card.visible"
-      :key="`card-${index}`"
+      :key="`card-${card.value}-${card.variant}`"
       :position="card.position"
       @select-card="flipCard"
       :matched="card.matched"
     />
-  </section>
+    </transition-group>
+
   <h2>
     {{ status }}
   </h2>
@@ -43,9 +45,7 @@ export default {
       ).length;
       return remainingCards / 2;
     });
-    const shuffleCards = () => {
-      CardList.value = _.shuffle(CardList.value);
-    };
+
     const cardItems = [
       "angular",
       "c++",
@@ -59,12 +59,14 @@ export default {
     cardItems.forEach((item) => {
       CardList.value.push({
         value: item,
+        variant:1,
         visible: true,
         position: null,
         matched: false,
       });
       CardList.value.push({
         value: item,
+        variant:2,
         visible: true,
         position: null,
         matched: false,
@@ -93,7 +95,7 @@ export default {
       }
     };
     const restartGame = () => {
-      shuffleCards();
+     CardList.value = _.shuffle(CardList.value);
       CardList.value = CardList.value.map((card, index) => {
         return {
           ...card,
@@ -129,7 +131,6 @@ export default {
       flipCard,
       userSelection,
       status,
-      shuffleCards,
       restartGame,
     };
   },
@@ -180,5 +181,8 @@ body {
 }
 .button img{
   padding-right: 10px;
+}
+.shuffle-card-move{
+  transition : transform 0.8s ease-in 
 }
 </style>
